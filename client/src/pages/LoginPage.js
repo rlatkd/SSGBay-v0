@@ -1,6 +1,6 @@
 import { Link, useNavigate  } from "react-router-dom";
 import React, { useState } from 'react';
-import styles from '../components/LoginPage.module.css';
+import styles from '../styles/LoginPage.module.css';
 
 
 
@@ -28,11 +28,6 @@ function LoginPage() {
       });
       console.log(response)
       if (response.ok) {
-        // const data = await response.json();
-        // const token = data.token;
-        // const userId = data.userId;
-        // console.log(token, userId)
-
         const data = await response.json();
 
         // 토큰과 ID를 받아옴

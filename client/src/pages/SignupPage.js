@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useRef, useState } from "react";
 import { Link , useNavigate} from "react-router-dom";
+
 
 function SignupPage() {
     const navigate = useNavigate();
@@ -12,11 +12,11 @@ function SignupPage() {
       userNickname: ''
     });
 
-    const refUserId = useRef(null);
-    const refUserPwd1 = useRef(null);
-    const refUserPwd2 = useRef(null);
-    const refUserPhone = useRef(null);
-    const refUserNickname = useRef(null);
+    const refUserId = useRef();
+    const refUserPwd1 = useRef();
+    const refUserPwd2 = useRef();
+    const refUserPhone = useRef();
+    const refUserNickname = useRef();
 
     const handlerChange = (e) => {
       const { name, value } = e.target;
@@ -98,7 +98,6 @@ function SignupPage() {
     return (
       <>
         <div className="signupbox">
-            {/* 네모난 큰 박스 */}
             <div className="signupboxtitle">
                 <h1>회원가입</h1>
             </div>
@@ -112,7 +111,6 @@ function SignupPage() {
             <div style={{textAlign: 'center'}}>
               <Link to='/'><button className="signupbutton" type="submit" onClick={handlerClick}>가입하기</button></Link>
             </div>
-
         </div>
       </>
     );

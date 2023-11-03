@@ -1,26 +1,26 @@
-import { Link, useNavigate, useLocation  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 import { RiAuctionFill } from "react-icons/ri";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   AiOutlineSearch,
   AiOutlineShoppingCart,
   AiOutlineUser,
 } from "react-icons/ai";
 
+
 function Header() {
   const [keyword, setKeyword] = useState("");
   const isLogin = localStorage.getItem('token'); // 토큰이 존재하는지 확인
-
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const handleLogout = () => {
+  const handlerLogout = () => {
     // 로그아웃 시 localStorage의 토큰 제거
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     navigate("/");
   };
+
   const handlerMyPage = () => {
     if (isLogin) {
       navigate('/mypage');
@@ -42,15 +42,15 @@ function Header() {
       }
     }
   };
-  const handleSubmit = (e) => {
-    e.preventDefault(); // onSubmit 시 새로고침 기본동작 방지
-    // 유효성 검사 추가할 것.
+
+  const handlerSubmit = (e) => {
+    e.preventDefault(); 
     console.log("here")
-    setKeyword(''); // Reset keyword to clear the search input
+    setKeyword(''); 
     navigate('/', { state: { query: keyword } });
-    
   };
-  const handleKeyword = (event) => {
+
+  const handlerKeyword = (event) => {
     setKeyword(event.target.value);
     console.log(`키워드상태관리: ${event.target.value}`);
   };
@@ -61,7 +61,7 @@ function Header() {
         <div className={styles.first1}>
           <div className={styles.first2}>
           {
-            isLogin  ? (<button onClick={handleLogout}>로그아웃</button>) : 
+            isLogin  ? (<button onClick={handlerLogout}>로그아웃</button>) : 
             (<button><Link to='/login'>로그인/회원가입</Link></button>)
           }
 
@@ -74,12 +74,12 @@ function Header() {
             <RiAuctionFill></RiAuctionFill>
             <span className={styles.ssg}>쓱</span>Bay
           </Link>
-          <form onSubmit={handleSubmit} className={styles.searchBar}>
+          <form onSubmit={handlerSubmit} className={styles.searchBar}>
             <input
               type="text"
               className={styles.searchInput}
               placeholder="검색"
-              onChange={handleKeyword}
+              onChange={handlerKeyword}
               value={keyword}
             />
             <button className={styles.searchButton}>
@@ -94,8 +94,6 @@ function Header() {
             <button className={styles.tabLink} onClick={handlerMyPage}>
             <AiOutlineUser/>마이페이지
             </button>
-            
-          
         </div>
       </div>
     </div>
